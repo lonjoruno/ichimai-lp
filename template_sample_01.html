@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDIO NOIR | あなたのビジネスを、静かに、確かに。</title>
+<meta name="description" content="〇〇のためのサービスを提供しています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-alt: #ebe6da;
+    --ink: #1f1d1a;
+    --ink-soft: #5a554d;
+    --accent: #2f4a3a;
+    --accent-warm: #b8693d;
+    --line: #d6cfbf;
+    --font-serif: "Shippori Mincho B1", serif;
+    --font-sans: "Zen Kaku Gothic New", sans-serif;
+    --font-en: "Cormorant Garamond", serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(244, 241, 234, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+
+  .logo {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    letter-spacing: 0.25em;
+    font-weight: 500;
+  }
+  .logo span { color: var(--accent-warm); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-warm);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    padding: 0.6rem 1.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    gap: 4rem;
+  }
+
+  .hero::before {
+    content: '01';
+    position: absolute;
+    top: 50%;
+    right: 3rem;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.3em;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent-warm);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '— ';
+    color: var(--ink-soft);
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.3;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero h1 .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--font-en);
+    font-weight: 400;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+  .btn-primary .arrow { transition: transform 0.3s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .btn-text {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+  }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 3/4;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-visual .frame {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent) 0%, #1a2e22 100%);
+    overflow: hidden;
+  }
+  .hero-visual .frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(184, 105, 61, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(244, 241, 234, 0.1) 0%, transparent 50%);
+  }
+  .hero-visual .frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(244,241,234,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,241,234,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-visual .label {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--bg);
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--line);
+    max-width: 240px;
+  }
+  .hero-visual .label-num {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .hero-visual .label-txt {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding: 8rem 3rem; position: relative; }
+  .section-num {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .section-lead {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    background: var(--bg-alt);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-image {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(31, 29, 26, 0.4) 100%),
+      linear-gradient(135deg, #8b7355 0%, #5a4a3a 100%);
+    position: relative;
+  }
+  .about-image::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid var(--line);
+    z-index: -1;
+  }
+  .about-image .signature {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    color: var(--bg);
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== SERVICES ===== */
+  .services { background: var(--bg); }
+  .services-header { max-width: 720px; margin-bottom: 5rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .service-card {
+    background: var(--bg);
+    padding: 3rem 2.5rem;
+    transition: background 0.4s;
+    position: relative;
+  }
+  .service-card:hover { background: var(--bg-alt); }
+  .service-card .num {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .service-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .service-card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .service-card .more {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+  }
+
+  /* ===== WORKS / FEATURED ===== */
+  .featured {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 8rem 3rem;
+  }
+  .featured .section-title { color: var(--bg); }
+  .featured .section-lead { color: #a8a39a; }
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin-top: 5rem;
+  }
+  .featured-item {
+    border-top: 1px solid #3a3530;
+    padding-top: 2.5rem;
+  }
+  .featured-item .meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .featured-item h4 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .featured-item p {
+    color: #a8a39a;
+    font-size: 0.95rem;
+  }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: var(--bg-alt);
+    text-align: center;
+    padding: 10rem 3rem;
+    position: relative;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    width: 1px;
+    height: 4rem;
+    background: var(--accent-warm);
+  }
+  .cta-eyebrow {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+  }
+  .cta h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.4;
+    font-weight: 500;
+    margin-bottom: 3rem;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 4rem 3rem 2rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #3a3530;
+  }
+  .footer-brand .logo { color: var(--bg); margin-bottom: 1rem; }
+  .footer-brand p {
+    color: #a8a39a;
+    font-size: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-col h5 {
+    font-family: var(--font-en);
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a {
+    color: #a8a39a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: #6a655c;
+    font-size: 0.8rem;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 7rem 1.5rem 4rem;
+      gap: 3rem;
+    }
+    .hero::before { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .featured-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .featured { padding: 5rem 1.5rem; }
+    .cta { padding: 6rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">STUDIO<span>.</span>NOIR</div>
+  <ul class="nav-links">
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="#works">WORKS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Est. 2025 / Tokyo, Japan</div>
+    <h1>
+      静かに、確かに、<br>
+      <span class="accent">あなたらしさ</span>を、<br>
+      届ける。
+    </h1>
+    <p>はじめての一歩を踏み出す経営者のために。 ブランドの輪郭を整え、伝わる言葉とかたちでお客様の元へ届けます。</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        相談してみる <span class="arrow">→</span>
+      </a>
+      <a href="#services" class="btn-text">サービスを見る</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="frame"></div>
+    <div class="label">
+      <div class="label-num">— No. 001</div>
+      <div class="label-txt">小さく始めて、長く続く。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image reveal">
+    <div class="signature">— since 2025</div>
+  </div>
+  <div class="reveal">
+    <span class="section-num">02 — About</span>
+    <h2 class="section-title">物語のはじまりに、<br>寄り添うパートナーを。</h2>
+    <p class="section-lead">私たちは、はじめてお店を持つ方、独立したばかりの方、これから何かを始めようとしている方のための小さな制作スタジオです。大げさな演出ではなく、あなたの想いがそのまま伝わるかたちを、一緒に考えていきます。</p>
+    <br>
+    <p class="section-lead">「とりあえずホームページ」ではなく、「届けたい人にちゃんと届く一枚」を。あなたのビジネスの最初の名刺になるような場所を、丁寧につくります。</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <span class="section-num">03 — Services</span>
+    <h2 class="section-title">私たちにできること</h2>
+    <p class="section-lead">ホームページ制作を中心に、あなたのビジネスの「顔」となる場所づくりをサポートします。</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="num">— 01</span>
+      <h3>シンプル<br>ホームページ</h3>
+      <p>必要なものだけを、美しく。1ページ完結型の名刺代わりになるサイトを、短期間で。</p>
+      <a href="#contact" class="more">詳しく見る →</a>
+    </div>
+    <div class="service-card reveal">
+      <span class="num">— 02</span>
+      <h3>ブランディング<br>サポート</h3>
+      <p>ロゴ・配色・言葉選びまで。あなたのビジネスの「世界観」をかたちにします。</p>
+      <a href="#contact" class="more">詳しく見る →</a>
+    </div>
+    <div class="service-card reveal">
+      <span class="num">— 03</span>
+      <h3>SNS連携<br>導線設計</h3>
+      <p>InstagramやXからの流入を、お問い合わせまでスムーズに繋ぐ動線を設計します。</p>
+      <a href="#contact" class="more">詳しく見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured" id="works">
+  <div class="reveal">
+    <span class="section-num">04 — Voices</span>
+    <h2 class="section-title">お客様の声</h2>
+    <p class="section-lead">これまでお手伝いさせていただいた方々から、嬉しい言葉をいただきました。</p>
+  </div>
+  <div class="featured-grid">
+    <div class="featured-item reveal">
+      <div class="meta"><span>Cafe Owner</span><span>— 2025</span></div>
+      <h4>「お店の雰囲気を、そのまま<br>映してくれました。」</h4>
+      <p>初めてのホームページで不安でしたが、丁寧に話を聞いてくださり、本当にやってよかったと思える一枚になりました。</p>
+    </div>
+    <div class="featured-item reveal">
+      <div class="meta"><span>Consultant</span><span>— 2025</span></div>
+      <h4>「お問い合わせが、<br>2倍に増えました。」</h4>
+      <p>SNSからの誘導も含めて全体を設計してもらえたおかげで、独立後の集客がぐっと楽になりました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="reveal">
+    <div class="cta-eyebrow">— Let's start —</div>
+    <h2>はじめの一歩を、<br>一緒に踏み出しませんか。</h2>
+    <a href="#" class="btn-primary">
+      まずは無料相談 <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">STUDIO<span>.</span>NOIR</div>
+      <p>はじめての一歩を踏み出す経営者のための、小さな制作スタジオ。</p>
+    </div>
+    <div class="footer-col">
+      <h5>Menu</h5>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#works">Works</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="#">よくある質問</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Social</h5>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X (Twitter)</a></li>
+        <li><a href="#">Note</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 STUDIO NOIR. All rights reserved.</span>
+    <span>Designed with care, in Tokyo.</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

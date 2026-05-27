@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HELLO! BAKERY | 毎日に、ちいさな幸せを。</title>
+<meta name="description" content="あなたのお店・サービスを、もっと身近に届けるためのホームページ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fredoka:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fef7ec;
+    --bg-soft: #fde6cf;
+    --ink: #2b1d0e;
+    --ink-soft: #6b5b4a;
+    --coral: #ff6b4a;
+    --yellow: #ffc94d;
+    --green: #7ac74f;
+    --pink: #ffafc5;
+    --blue: #4ea8de;
+    --font-display: "DM Serif Display", serif;
+    --font-round: "M PLUS Rounded 1c", sans-serif;
+    --font-fred: "Fredoka", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-round);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Decorative blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.8rem 0.8rem 0.8rem 2rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    box-shadow: 0 8px 30px rgba(43, 29, 14, 0.15);
+  }
+  .logo {
+    font-family: var(--font-fred);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+  .logo .dot { color: var(--coral); }
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta {
+    background: var(--coral);
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: transform 0.3s;
+  }
+  .nav-cta:hover { transform: scale(1.05); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    gap: 3rem;
+  }
+  .hero .blob-1 {
+    width: 500px; height: 500px;
+    background: var(--coral);
+    top: -100px; left: -150px;
+  }
+  .hero .blob-2 {
+    width: 400px; height: 400px;
+    background: var(--yellow);
+    bottom: -100px; right: 100px;
+    opacity: 0.4;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 2px solid var(--ink);
+    padding: 0.4rem 1rem 0.4rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    box-shadow: 4px 4px 0 var(--ink);
+    opacity: 0;
+    animation: pop 0.6s 0.2s forwards;
+  }
+  .hero-badge .emoji {
+    width: 26px; height: 26px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-round);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: slideUp 0.8s 0.4s forwards;
+  }
+  .hero h1 .stroke {
+    position: relative;
+    display: inline-block;
+    color: var(--coral);
+  }
+  .hero h1 .stroke::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1em;
+    left: -2%;
+    width: 104%;
+    height: 0.3em;
+    background: var(--yellow);
+    z-index: -1;
+    border-radius: 4px;
+  }
+  .hero h1 .wave {
+    display: inline-block;
+    animation: wave 2s 1s infinite;
+    transform-origin: 70% 70%;
+  }
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(14deg); }
+    50% { transform: rotate(-4deg); }
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: slideUp 0.8s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: slideUp 0.8s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 1rem 2.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s;
+    box-shadow: 4px 4px 0 var(--coral);
+  }
+  .btn-primary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--coral);
+  }
+  .btn-secondary {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 2px;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1/1;
+    opacity: 0;
+    animation: slideUp 1s 0.5s forwards;
+  }
+  .visual-card {
+    position: absolute;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 24px;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 1.5rem;
+  }
+  .visual-main {
+    inset: 10% 15% 15% 10%;
+    background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+  }
+  .visual-main::before {
+    content: '🥐';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+  }
+  .visual-tag {
+    bottom: 10%;
+    right: 5%;
+    background: var(--yellow);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transform: rotate(6deg);
+    animation: bobble 3s ease-in-out infinite;
+  }
+  .visual-mini {
+    top: 8%;
+    right: 0;
+    background: var(--green);
+    color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+    transform: rotate(-10deg);
+    box-shadow: 4px 4px 0 var(--ink);
+    border: 3px solid var(--ink);
+    padding: 0;
+  }
+  .visual-mini strong {
+    font-size: 1.4rem;
+    font-family: var(--font-display);
+  }
+  @keyframes bobble {
+    0%, 100% { transform: rotate(6deg) translateY(0); }
+    50% { transform: rotate(6deg) translateY(-8px); }
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 1.2rem 0;
+    overflow: hidden;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: scroll 25s linear infinite;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.8rem;
+  }
+  .marquee-track span { display: flex; align-items: center; gap: 3rem; }
+  .marquee-track .star { color: var(--yellow); font-size: 1.2rem; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: 7rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+  }
+  .about .blob-3 {
+    width: 350px; height: 350px;
+    background: var(--blue);
+    top: 30%; right: -100px;
+    opacity: 0.25;
+  }
+  .about-img {
+    aspect-ratio: 1/1;
+    background: var(--pink);
+    border: 3px solid var(--ink);
+    border-radius: 32px;
+    box-shadow: 10px 10px 0 var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img::before {
+    content: '👋';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10rem;
+  }
+  .about-img .sticker {
+    position: absolute;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    bottom: 20px;
+    left: 20px;
+    transform: rotate(-4deg);
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--yellow);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: var(--font-round);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .section-title em {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--coral);
+  }
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+
+  /* ===== MENU/SERVICES ===== */
+  .menu {
+    background: var(--bg-soft);
+    padding: 7rem 4rem;
+    position: relative;
+  }
+  .menu-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .menu-card {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.3s;
+    position: relative;
+  }
+  .menu-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .menu-card .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    border: 3px solid var(--ink);
+  }
+  .menu-card:nth-child(1) .icon { background: var(--coral); }
+  .menu-card:nth-child(2) .icon { background: var(--yellow); }
+  .menu-card:nth-child(3) .icon { background: var(--green); }
+  .menu-card h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+  }
+  .menu-card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .menu-price {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--coral);
+    font-weight: 400;
+  }
+  .menu-price small {
+    font-family: var(--font-round);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ===== VOICES ===== */
+  .voices {
+    padding: 7rem 4rem;
+    text-align: center;
+    position: relative;
+  }
+  .voices .blob-4 {
+    width: 400px; height: 400px;
+    background: var(--green);
+    top: 50%; left: -100px;
+    opacity: 0.3;
+  }
+  .voices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .voice-card {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: left;
+    position: relative;
+  }
+  .voice-card:nth-child(1) { transform: rotate(-2deg); }
+  .voice-card:nth-child(2) { transform: rotate(1deg); }
+  .voice-card:nth-child(3) { transform: rotate(-1deg); }
+  .voice-card .stars { color: var(--yellow); margin-bottom: 1rem; font-size: 1.1rem; }
+  .voice-card .quote {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .voice-card .author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .voice-card .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--pink);
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .voice-card:nth-child(2) .avatar { background: var(--blue); color: white; }
+  .voice-card:nth-child(3) .avatar { background: var(--green); color: white; }
+  .voice-card .author-name { font-weight: 700; font-size: 0.95rem; }
+  .voice-card .author-role { font-size: 0.8rem; color: var(--ink-soft); }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: var(--coral);
+    padding: 6rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .cta::before {
+    content: '✨';
+    position: absolute;
+    top: 20%; left: 10%;
+    font-size: 3rem;
+    animation: spin 8s linear infinite;
+  }
+  .cta::after {
+    content: '🎉';
+    position: absolute;
+    bottom: 20%; right: 10%;
+    font-size: 3rem;
+    animation: spin 6s linear infinite reverse;
+  }
+  @keyframes spin {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+  }
+  .cta h2 {
+    font-family: var(--font-round);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cta h2 em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--yellow);
+  }
+  .cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+  }
+  .cta .btn-primary {
+    background: white;
+    color: var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    font-size: 1.05rem;
+    padding: 1.2rem 2.8rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 4rem 4rem 2rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .footer-brand .logo {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .footer-brand p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-col h5 {
+    color: var(--yellow);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.5rem; }
+  .footer-col a {
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.75;
+    transition: opacity 0.3s;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom {
+    padding-top: 2rem;
+    text-align: center;
+    opacity: 0.5;
+    font-size: 0.85rem;
+  }
+
+  /* Animations */
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    nav { left: 1rem; right: 1rem; transform: none; padding: 0.6rem 0.6rem 0.6rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 7rem 1.5rem 4rem;
+    }
+    .hero-visual { max-width: 360px; margin: 0 auto; }
+    .about { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+    .menu { padding: 5rem 1.5rem; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .voices { padding: 5rem 1.5rem; }
+    .voices-grid { grid-template-columns: 1fr; }
+    .cta { padding: 4rem 1.5rem; }
+    footer { padding: 3rem 1.5rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">HELLO<span class="dot">!</span> BAKERY</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#voices">Voices</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">ご予約 →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="emoji">★</span>
+      OPEN! 毎週水・木・金 / 10:00-18:00
+    </div>
+    <h1>
+      毎日に、<br>
+      <span class="stroke">ちいさな幸せ</span>を。<br>
+      <span class="wave">🥐</span>
+    </h1>
+    <p>地元の素材と、ちょっとした遊び心で。 食べた瞬間にうれしくなる、そんなパンを焼いています。</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">
+        メニューを見る <span>→</span>
+      </a>
+      <a href="#about" class="btn-secondary">お店について</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual-card visual-main"></div>
+    <div class="visual-card visual-mini">
+      <strong>5</strong>
+      yrs of love
+    </div>
+    <div class="visual-card visual-tag">
+      ⭐ 焼きたて毎日
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Fresh baked daily <span class="star">✦</span></span>
+    <span>地元の素材 <span class="star">✦</span></span>
+    <span>Made with love <span class="star">✦</span></span>
+    <span>毎日焼きたて <span class="star">✦</span></span>
+    <span>Open Wed-Fri <span class="star">✦</span></span>
+    <span>Fresh baked daily <span class="star">✦</span></span>
+    <span>地元の素材 <span class="star">✦</span></span>
+    <span>Made with love <span class="star">✦</span></span>
+    <span>毎日焼きたて <span class="star">✦</span></span>
+    <span>Open Wed-Fri <span class="star">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="blob blob-3"></div>
+  <div class="about-img reveal">
+    <div class="sticker">since 2020</div>
+  </div>
+  <div class="reveal">
+    <span class="section-tag">★ About us</span>
+    <h2 class="section-title">小さな店から、<br><em>毎日に</em>そっと、<br>あたたかさを。</h2>
+    <p class="section-lead">2020年、小さな町に小さなお店をオープンしました。 大切にしているのは、お客さんとの距離感と、毎朝の「いってらっしゃい」。</p>
+    <p class="section-lead">パンを通して、誰かの一日がちょっとだけ良くなるなら。 それが、私たちの一番の喜びです。</p>
+    <a href="#" class="btn-secondary">もっと詳しく →</a>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header reveal">
+    <span class="section-tag">★ Menu</span>
+    <h2 class="section-title">人気の<em>メニュー</em></h2>
+    <p class="section-lead" style="margin: 0 auto;">毎日焼きたてをご用意しています。</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="icon">🥐</div>
+      <h3>クロワッサン</h3>
+      <p>バターの香りがふわっと広がる、定番の一番人気。朝食にも、おやつにも。</p>
+      <div class="menu-price">¥320 <small>/ 1個</small></div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="icon">🍞</div>
+      <h3>食パン</h3>
+      <p>毎朝6時に焼き上げる、ふんわりもっちりの食パン。トースト最高です。</p>
+      <div class="menu-price">¥480 <small>/ 1斤</small></div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="icon">🥯</div>
+      <h3>季節のパン</h3>
+      <p>季節ごとに変わる限定パン。今月は栗あんバターサンドが登場中です。</p>
+      <div class="menu-price">¥420 <small>/ 1個</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices" id="voices">
+  <div class="blob blob-4"></div>
+  <span class="section-tag reveal">★ Voices</span>
+  <h2 class="section-title reveal">お客さんの<em>こえ</em></h2>
+  <div class="voices-grid">
+    <div class="voice-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"朝のクロワッサンが楽しみで、出勤前に寄るのが日課になりました。本当にしあわせ。"</p>
+      <div class="author">
+        <div class="avatar">A</div>
+        <div>
+          <div class="author-name">あゆみさん</div>
+          <div class="author-role">常連 / 会社員</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"お店の雰囲気もスタッフさんも、ぜんぶ好き。手土産にもよく使ってます！"</p>
+      <div class="author">
+        <div class="avatar">K</div>
+        <div>
+          <div class="author-name">こうじさん</div>
+          <div class="author-role">近所在住</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"子供と一緒に行くと、いつも丁寧に説明してくれて。週末のお楽しみです。"</p>
+      <div class="author">
+        <div class="avatar">M</div>
+        <div>
+          <div class="author-name">みかさん</div>
+          <div class="author-role">主婦 / 2児の母</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <h2>あなたも、<em>はじめの一口</em>、<br>いかがですか？</h2>
+  <p>お取り置き・ご予約も承っております。お気軽にどうぞ！</p>
+  <a href="#" class="btn-primary">
+    ご予約・お問い合わせ <span>→</span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">HELLO<span style="color: var(--coral);">!</span> BAKERY</span>
+      <p>毎日に、ちいさな幸せを。地元の素材で焼くパンの店です。</p>
+    </div>
+    <div class="footer-col">
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#">メニュー</a></li>
+        <li><a href="#">店舗情報</a></li>
+        <li><a href="#">アクセス</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Info</h5>
+      <ul>
+        <li><a href="#">よくある質問</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Follow</h5>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X (Twitter)</a></li>
+        <li><a href="#">LINE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 HELLO! BAKERY — Made with 💛
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

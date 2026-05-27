@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAIRO / CONSULTING — 次の選択を、確かなものに。</title>
+<meta name="description" content="経営戦略・事業開発のためのコンサルティングサービス。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f3ef;
+    --paper: #ffffff;
+    --ink: #0a0a0a;
+    --ink-soft: #6b6b6b;
+    --line: #d9d6cf;
+    --accent: #ff3d1f;
+    --accent-cool: #1a3a8f;
+    --font-display: "Big Shoulders Display", sans-serif;
+    --font-serif: "Instrument Serif", serif;
+    --font-body: "Manrope", "Noto Sans JP", sans-serif;
+    --font-jp: "Noto Sans JP", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 1.5rem 2.5rem;
+    background: rgba(244, 243, 239, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--line); }
+
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .logo .slash { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    justify-content: center;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .nav-links a::before {
+    content: counter(navnum, decimal-leading-zero);
+    counter-increment: navnum;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-right: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .nav-links { counter-reset: navnum; }
+
+  .nav-meta {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 2.5rem 3rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 3rem;
+    position: relative;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hero-meta span strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .hero-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(4rem, 11vw, 11rem);
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+  .hero h1 .line {
+    display: block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: lineUp 0.9s forwards;
+  }
+  .hero h1 .line:nth-child(1) { animation-delay: 0.2s; }
+  .hero h1 .line:nth-child(2) { animation-delay: 0.35s; }
+  .hero h1 .line:nth-child(3) { animation-delay: 0.5s; padding-left: 15%; }
+  .hero h1 .line .accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .hero-side {
+    border-left: 1px solid var(--ink);
+    padding-left: 2rem;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.8s forwards;
+  }
+  .hero-side .num {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-side p {
+    font-family: var(--font-jp);
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .hero-side .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 2rem;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    max-width: 580px;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 1.1rem 2rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: background 0.3s;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-primary .arrow {
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+  }
+  .btn-primary .arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px;
+    width: 8px; height: 8px;
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .hero-scroll {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 30px;
+    background: var(--ink-soft);
+  }
+
+  /* ===== TICKER ===== */
+  .ticker {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .ticker-track {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .ticker-track span { display: inline-flex; align-items: center; gap: 3rem; }
+  .ticker-track .dot { color: var(--accent); font-size: 0.6rem; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== APPROACH ===== */
+  .approach {
+    padding: 7rem 2.5rem;
+    background: var(--bg);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--ink);
+  }
+  .section-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .section-label .num { color: var(--ink); margin-right: 0.5rem; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .section-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: var(--accent);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .approach-item {
+    padding: 2rem 2.5rem 2rem 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .approach-item:last-child { border-right: none; padding-right: 0; }
+  .approach-item:not(:first-child) { padding-left: 2.5rem; }
+  .approach-num {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .approach-num::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+    margin-top: 0.8rem;
+  }
+  .approach-item h3 {
+    font-family: var(--font-jp);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  .approach-item p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    font-family: var(--font-jp);
+  }
+
+  /* ===== ABOUT/MANIFESTO ===== */
+  .manifesto {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 8rem 2.5rem;
+    position: relative;
+  }
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+  }
+  .manifesto-side .section-label { color: var(--accent); }
+  .manifesto-side .num { color: var(--bg); }
+  .manifesto-side .meta {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+  .manifesto-side .meta strong {
+    color: var(--bg);
+    display: block;
+    font-weight: 500;
+  }
+  .manifesto-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .manifesto-text em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .manifesto-text .strike {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    opacity: 0.4;
+  }
+
+  /* ===== SERVICES ===== */
+  .services {
+    padding: 7rem 2.5rem;
+  }
+  .services-list { border-top: 1px solid var(--ink); }
+  .service-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.5fr 100px;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: padding 0.4s, background 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .service-row:hover {
+    padding-left: 1.5rem;
+  }
+  .service-row::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 0;
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.4s;
+    z-index: -1;
+  }
+  .service-row .num {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .service-row h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .service-row p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    font-family: var(--font-jp);
+  }
+  .service-row .arrow-icon {
+    font-size: 1.5rem;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .service-row:hover .arrow-icon { transform: translateX(8px); }
+
+  /* ===== STATS ===== */
+  .stats {
+    padding: 6rem 2.5rem;
+    background: var(--paper);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: 0 2rem;
+    border-right: 1px solid var(--line);
+    text-align: left;
+  }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+  .stat .num sup {
+    font-size: 0.4em;
+    color: var(--accent);
+    vertical-align: top;
+    margin-left: 0.1em;
+  }
+  .stat .label {
+    font-family: var(--font-jp);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ===== TESTIMONIAL ===== */
+  .testimonial {
+    padding: 8rem 2.5rem;
+    background: var(--bg);
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .testimonial-item {
+    border-top: 1px solid var(--ink);
+    padding-top: 2.5rem;
+  }
+  .testimonial-item .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+  .testimonial-item .meta span:last-child { color: var(--ink-soft); }
+  .testimonial-item blockquote {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+  .testimonial-item .author {
+    font-family: var(--font-jp);
+    font-size: 0.9rem;
+  }
+  .testimonial-item .author strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .testimonial-item .author span {
+    color: var(--ink-soft);
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 10rem 2.5rem;
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'CONTACT — START — DECIDE — BEGIN — CONTACT — START — DECIDE — BEGIN —';
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    opacity: 0.25;
+  }
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+  .cta-section h2 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: var(--ink);
+  }
+  .cta-section .btn-primary {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .cta-section .btn-primary:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 4rem 2.5rem 2rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .footer-brand .logo {
+    color: var(--bg);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .footer-brand p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    max-width: 320px;
+    font-family: var(--font-jp);
+  }
+  .footer-col h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Animations */
+  @keyframes lineUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    nav { grid-template-columns: 1fr auto; padding: 1rem 1.5rem; }
+    .nav-links, .nav-meta { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-meta { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hero-main { grid-template-columns: 1fr; gap: 2rem; }
+    .hero h1 .line:nth-child(3) { padding-left: 0; }
+    .hero-side { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 2rem; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
+    .hero-scroll { display: none; }
+    .approach, .manifesto, .services, .testimonial { padding: 5rem 1.5rem; }
+    .section-head { grid-template-columns: 1fr; gap: 1.5rem; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-item { border-right: none; border-bottom: 1px solid var(--line); padding: 2rem 0 !important; }
+    .manifesto-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .service-row { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
+    .service-row p, .service-row .arrow-icon { display: none; }
+    .service-row h3 { font-size: 1.5rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem 0; }
+    .stat { padding: 1rem; border-right: 1px solid var(--line); }
+    .stat:nth-child(even) { border-right: none; }
+    .testimonial-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .cta-section { padding: 6rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">KAIRO<span class="slash">/</span>CO</div>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#voices">Voices</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-meta">Est. 2025 — Tokyo / Tokyo</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-meta">
+    <span><strong>FILE</strong> — N°2025/01</span>
+    <span><strong>BASED IN</strong> — Tokyo, JP</span>
+    <span><strong>FOR</strong> — Founders & Operators</span>
+    <span><strong>SINCE</strong> — 2025</span>
+  </div>
+
+  <div class="hero-main">
+    <h1>
+      <span class="line">Next</span>
+      <span class="line"><span class="accent">decision,</span></span>
+      <span class="line">made right.</span>
+    </h1>
+    <div class="hero-side">
+      <div class="num">01</div>
+      <div class="label">— Mission</div>
+      <p>意思決定の質を、ひとつ上のレベルへ。 経営の岐路に立つ起業家のための、伴走型コンサルティング。</p>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-tagline">"判断に迷う一晩より、 — 確かな一歩を。"</p>
+    <a href="#contact" class="btn-primary">
+      無料相談を申し込む <span class="arrow"></span>
+    </a>
+    <div class="hero-scroll">SCROLL</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Strategy <span class="dot">●</span></span>
+    <span>Operations <span class="dot">●</span></span>
+    <span>Growth <span class="dot">●</span></span>
+    <span>Finance <span class="dot">●</span></span>
+    <span>Brand <span class="dot">●</span></span>
+    <span>Strategy <span class="dot">●</span></span>
+    <span>Operations <span class="dot">●</span></span>
+    <span>Growth <span class="dot">●</span></span>
+    <span>Finance <span class="dot">●</span></span>
+    <span>Brand <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-head reveal">
+    <div class="section-label"><span class="num">02 /</span>Approach</div>
+    <h2 class="section-title">Think <em>sharp</em>,<br>act faster.</h2>
+  </div>
+  <div class="approach-grid">
+    <div class="approach-item reveal">
+      <span class="approach-num">01</span>
+      <h3>診る</h3>
+      <p>現状を多角的に分析。数字、市場、組織、すべての要素を構造的に把握します。</p>
+    </div>
+    <div class="approach-item reveal">
+      <span class="approach-num">02</span>
+      <h3>描く</h3>
+      <p>選択肢を整理し、トレードオフを明確化。最善の打ち手を共に設計します。</p>
+    </div>
+    <div class="approach-item reveal">
+      <span class="approach-num">03</span>
+      <h3>動く</h3>
+      <p>実行段階まで伴走。仮説検証を繰り返し、成果に直結する動きをつくります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-grid">
+    <div class="manifesto-side">
+      <div class="section-label"><span class="num">03 /</span>Manifesto</div>
+      <div class="meta">
+        <strong>Founded</strong>
+        2025, Tokyo
+        <br>
+        <strong>Practice</strong>
+        Strategy & Operations
+        <br>
+        <strong>Engagement</strong>
+        3–12 months
+      </div>
+    </div>
+    <div class="manifesto-text reveal">
+      私たちは、 <span class="strike">大きな提案書</span> ではなく、<br>
+      <em>確かな一手</em> を届けます。<br><br>
+      流行や理論ではなく、 あなたのビジネスの<br>
+      文脈に根ざした判断を、 一緒につくる。<br><br>
+      それが、KAIROのやり方です。
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-head reveal">
+    <div class="section-label"><span class="num">04 /</span>Services</div>
+    <h2 class="section-title">What we <em>do</em>.</h2>
+  </div>
+  <div class="services-list">
+    <div class="service-row reveal">
+      <div class="num">01</div>
+      <h3>Strategy<br>Sprint</h3>
+      <p>2週間で経営課題を構造化し、優先順位とアクションを明確化する集中プログラム。</p>
+      <div class="arrow-icon">→</div>
+    </div>
+    <div class="service-row reveal">
+      <div class="num">02</div>
+      <h3>Growth<br>Partner</h3>
+      <p>月次伴走型の経営パートナー。施策設計・KPI設計・実行レビューまで一貫してサポート。</p>
+      <div class="arrow-icon">→</div>
+    </div>
+    <div class="service-row reveal">
+      <div class="num">03</div>
+      <h3>Brand &<br>Position</h3>
+      <p>市場におけるポジショニングを再定義。ブランドメッセージから事業構造まで整理。</p>
+      <div class="arrow-icon">→</div>
+    </div>
+    <div class="service-row reveal">
+      <div class="num">04</div>
+      <h3>Founders<br>1on1</h3>
+      <p>経営者の壁打ち相手として、月2回90分のセッション。意思決定の質を高めます。</p>
+      <div class="arrow-icon">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="num">120<sup>+</sup></div>
+      <div class="label">これまで支援した<br>経営者の数</div>
+    </div>
+    <div class="stat">
+      <div class="num">92<sup>%</sup></div>
+      <div class="label">継続契約率<br>(2025年実績)</div>
+    </div>
+    <div class="stat">
+      <div class="num">3.4<sup>x</sup></div>
+      <div class="label">平均的な売上成長率<br>(支援後12ヶ月)</div>
+    </div>
+    <div class="stat">
+      <div class="num">15<sup>業種</sup></div>
+      <div class="label">サポート実績の<br>ある業種数</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial" id="voices">
+  <div class="section-head reveal">
+    <div class="section-label"><span class="num">05 /</span>Voices</div>
+    <h2 class="section-title">From <em>founders</em>.</h2>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testimonial-item reveal">
+      <div class="meta"><span>— 005</span><span>SaaS / Founder</span></div>
+      <blockquote>"判断が早くなった。それだけで、半年分の時間を取り戻した感覚です。"</blockquote>
+      <div class="author">
+        <strong>K. Tanaka</strong>
+        <span>SaaS Startup / CEO</span>
+      </div>
+    </div>
+    <div class="testimonial-item reveal">
+      <div class="meta"><span>— 006</span><span>D2C / Founder</span></div>
+      <blockquote>"伴走してくれる存在の有無で、ここまで違うとは思わなかった。"</blockquote>
+      <div class="author">
+        <strong>M. Sato</strong>
+        <span>D2C Brand / Founder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Let's <em>start</em><br>the conversation.</h2>
+  <a href="#" class="btn-primary">
+    無料相談を申し込む <span class="arrow"></span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">KAIRO<span style="color: var(--accent);">/</span>CO</span>
+      <p>意思決定の質を高める、伴走型コンサルティング。経営の岐路に立つ起業家のために。</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">Strategy Sprint</a></li>
+        <li><a href="#">Growth Partner</a></li>
+        <li><a href="#">Brand & Position</a></li>
+        <li><a href="#">Founders 1on1</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Manifesto</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">X (Twitter)</a></li>
+        <li><a href="#">Note</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 KAIRO/CO — All rights reserved.</span>
+    <span>EST. 2025 / TOKYO, JP</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

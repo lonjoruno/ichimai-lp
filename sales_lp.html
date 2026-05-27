@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICHIMAI. — かけ出し経営者のための、はじめの一枚。</title>
+<meta name="description" content="プロ品質のホームページテンプレートを、手の届く価格で。SNSからの集客に最適化された、業種を問わない3種のデザインをご用意しています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,500;10..48,700;10..48,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ec;
+    --bg-soft: #efe9d9;
+    --bg-card: #ffffff;
+    --ink: #0e0d0a;
+    --ink-soft: #5d574d;
+    --line: #d9d3c2;
+    --accent: #ff5722;
+    --accent-deep: #1a2438;
+    --success: #2d7a4a;
+    --font-display: "Bricolage Grotesque", "Noto Sans JP", sans-serif;
+    --font-serif: "Fraunces", serif;
+    --font-jp: "Noto Sans JP", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-jp);
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    background: rgba(247, 244, 236, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--line); }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+  }
+  .logo .dot { color: var(--accent); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.7rem 1.4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 9rem 2.5rem 5rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    min-height: 90vh;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 2.5rem; right: 2.5rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--line) 20%, var(--line) 80%, transparent);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 0.4rem 1rem 0.4rem 0.5rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--ink-soft);
+  }
+  .hero-badge .pulse {
+    width: 8px; height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    position: relative;
+  }
+  .hero-badge .pulse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+  .hero h1 .ital {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero h1 .highlight {
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1em;
+    left: -2%;
+    width: 104%;
+    height: 0.25em;
+    background: var(--accent);
+    opacity: 0.25;
+    z-index: -1;
+  }
+
+  .hero-lead {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 1.1rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s;
+    border: 2px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .btn-primary .arrow { transition: transform 0.3s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 1.1rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 2px solid var(--ink);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--bg); }
+
+  .hero-proof {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .hero-proof .avatars {
+    display: flex;
+  }
+  .hero-proof .avatars span {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-left: -10px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .hero-proof .avatars span:first-child { margin-left: 0; background: var(--accent); }
+  .hero-proof .avatars span:nth-child(2) { background: var(--accent-deep); }
+  .hero-proof .avatars span:nth-child(3) { background: var(--success); }
+  .hero-proof strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* Hero visual - template stack */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+  }
+  .preview-card {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(14, 13, 10, 0.12);
+    transition: transform 0.4s ease;
+  }
+  .preview-card-1 {
+    inset: 0 30% 25% 0;
+    transform: rotate(-4deg);
+    z-index: 1;
+    background: #f4f1ea;
+  }
+  .preview-card-2 {
+    inset: 15% 0 10% 25%;
+    transform: rotate(3deg);
+    z-index: 2;
+    background: #fef7ec;
+  }
+  .preview-card-3 {
+    inset: 25% 15% 0 10%;
+    transform: rotate(-2deg);
+    z-index: 3;
+    background: #ffffff;
+  }
+  .hero-visual:hover .preview-card-1 { transform: rotate(-6deg) translateX(-10px); }
+  .hero-visual:hover .preview-card-2 { transform: rotate(4deg) translateY(-10px); }
+  .hero-visual:hover .preview-card-3 { transform: rotate(-1deg) translateY(10px); }
+
+  .preview-inner { padding: 1.5rem; height: 100%; display: flex; flex-direction: column; }
+  .preview-inner .pv-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .preview-inner h4 {
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin-bottom: auto;
+  }
+  .preview-inner .pv-tag {
+    font-size: 0.65rem;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pv1 h4 { font-family: var(--font-serif); color: #1f1d1a; font-weight: 500; }
+  .pv1 .pv-nav { color: #6a655c; font-family: var(--font-serif); font-style: italic; }
+  .pv2 h4 { font-family: 'M PLUS Rounded 1c', sans-serif; color: #2b1d0e; font-weight: 800; }
+  .pv2 .pv-nav { color: #ff6b4a; font-weight: 700; }
+  .pv3 h4 { font-family: var(--font-display); color: #0a0a0a; font-weight: 900; text-transform: uppercase; line-height: 0.95; }
+  .pv3 .pv-nav { color: #ff3d1f; font-family: var(--font-display); font-weight: 700; }
+
+  /* ===== LOGO TICKER ===== */
+  .ticker-section {
+    padding: 2rem 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .ticker-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 4rem;
+    white-space: nowrap;
+    animation: scroll-ticker 30s linear infinite;
+    align-items: center;
+    color: var(--ink-soft);
+  }
+  .ticker-track span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.4rem;
+    opacity: 0.6;
+  }
+  .ticker-track .sep { color: var(--accent); opacity: 1; }
+  @keyframes scroll-ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== PROBLEM ===== */
+  .problem {
+    padding: 7rem 2.5rem;
+    background: var(--bg-soft);
+    position: relative;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 720px;
+  }
+  .section-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin-bottom: 4rem;
+  }
+
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .problem-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .problem-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+  .problem-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .problem-card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ===== SOLUTION ===== */
+  .solution {
+    padding: 8rem 2.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+    position: relative;
+  }
+  .solution .section-label { color: var(--accent); }
+  .solution .section-label::before { background: var(--accent); }
+  .solution .section-title {
+    margin: 0 auto 1.5rem;
+    color: var(--bg);
+  }
+  .solution .section-lead {
+    color: rgba(247, 244, 236, 0.7);
+    margin: 0 auto 4rem;
+  }
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+  .solution-item {
+    text-align: left;
+    border-top: 1px solid rgba(247, 244, 236, 0.2);
+    padding-top: 2rem;
+  }
+  .solution-item .num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .solution-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .solution-item p {
+    color: rgba(247, 244, 236, 0.7);
+    font-size: 0.95rem;
+  }
+
+  /* ===== TEMPLATES ===== */
+  .templates {
+    padding: 8rem 2.5rem;
+    background: var(--bg);
+  }
+  .templates-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 5rem;
+  }
+  .templates-header .section-lead { margin-bottom: 0; }
+
+  .template-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .tpl-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s;
+    display: flex;
+    flex-direction: column;
+  }
+  .tpl-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(14, 13, 10, 0.1);
+    border-color: var(--ink);
+  }
+  .tpl-thumb {
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tpl-thumb-1 { background: #f4f1ea; }
+  .tpl-thumb-1 .tpl-h {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: #1f1d1a;
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+  .tpl-thumb-1 .tpl-h .it { font-style: italic; color: #2f4a3a; }
+  .tpl-thumb-1 .tpl-meta { color: #b8693d; font-family: var(--font-serif); font-style: italic; font-size: 0.8rem; letter-spacing: 0.15em; }
+
+  .tpl-thumb-2 { background: #fef7ec; }
+  .tpl-thumb-2 .tpl-h {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 800;
+    color: #2b1d0e;
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .tpl-thumb-2 .tpl-h .it {
+    color: #ff6b4a;
+    position: relative;
+  }
+  .tpl-thumb-2 .tpl-h .it::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1em; left: 0; right: 0;
+    height: 0.25em;
+    background: #ffc94d;
+    z-index: -1;
+  }
+  .tpl-thumb-2 .tpl-meta {
+    background: #ff6b4a;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  .tpl-thumb-3 { background: #ffffff; }
+  .tpl-thumb-3 .tpl-h {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: #0a0a0a;
+    font-size: 1.8rem;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .tpl-thumb-3 .tpl-h .it {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #ff3d1f;
+  }
+  .tpl-thumb-3 .tpl-meta {
+    color: #ff3d1f;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .tpl-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+  .tpl-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .tpl-style {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .tpl-desc {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+  .tpl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .tpl-tags span {
+    background: var(--bg-soft);
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+  .tpl-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .tpl-price strong {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .tpl-price small { color: var(--ink-soft); font-size: 0.85rem; }
+
+  /* ===== PRICING ===== */
+  .pricing {
+    padding: 8rem 2.5rem;
+    background: var(--bg-soft);
+  }
+  .pricing-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 4rem;
+  }
+  .pricing-header .section-label { justify-content: center; }
+  .pricing-header .section-title { margin-left: auto; margin-right: auto; }
+  .pricing-header .section-lead { margin-left: auto; margin-right: auto; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .price-card.featured {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+    transform: scale(1.03);
+  }
+  .price-card.featured .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .price-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .price-desc {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+  .price-card.featured .price-desc { color: rgba(247, 244, 236, 0.6); }
+  .price-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .price-card.featured .price-amount { border-color: rgba(247, 244, 236, 0.15); }
+  .price-amount .yen { font-size: 1rem; opacity: 0.6; }
+  .price-amount strong {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .price-amount small {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin-left: 0.3rem;
+  }
+  .price-card.featured .price-amount small { color: rgba(247, 244, 236, 0.6); }
+  .price-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex: 1;
+  }
+  .price-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    font-size: 0.9rem;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .price-cta {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.9rem 1.5rem;
+    text-align: center;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+    font-size: 0.95rem;
+  }
+  .price-cta:hover { background: var(--accent); }
+  .price-card.featured .price-cta {
+    background: var(--accent);
+  }
+  .price-card.featured .price-cta:hover { background: var(--bg); color: var(--ink); }
+
+  /* ===== PROCESS ===== */
+  .process {
+    padding: 8rem 2.5rem;
+    background: var(--bg);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+  .process-step {
+    position: relative;
+  }
+  .process-step .num {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+  .process-step .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .process-step h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .process-step p {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .process-step::after {
+    content: '→';
+    position: absolute;
+    top: 50px;
+    right: -1.5rem;
+    color: var(--line);
+    font-size: 1.5rem;
+  }
+  .process-step:last-child::after { display: none; }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: 8rem 2.5rem;
+    background: var(--bg-soft);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2.5rem;
+  }
+  .about-quote {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  .about-quote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-right: 0.2em;
+  }
+  .about-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .about-author .av {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: var(--font-display);
+  }
+  .about-author strong { display: block; font-weight: 700; }
+  .about-author span { color: var(--ink-soft); font-size: 0.85rem; }
+
+  /* ===== FAQ ===== */
+  .faq {
+    padding: 8rem 2.5rem;
+    background: var(--bg);
+  }
+  .faq-grid {
+    max-width: 800px;
+    margin: 4rem auto 0;
+  }
+  .faq-item {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 0;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.5rem 0;
+    user-select: none;
+  }
+  .faq-q .plus {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .plus { transform: rotate(45deg); }
+  .faq-a {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-top: 1rem;
+  }
+
+  /* ===== CTA FINAL ===== */
+  .cta-final {
+    padding: 9rem 2.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final::before, .cta-final::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+  }
+  .cta-final::before { top: -100px; left: -100px; }
+  .cta-final::after { bottom: -100px; right: -100px; }
+  .cta-final-inner { position: relative; z-index: 2; }
+  .cta-final h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-final h2 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .cta-final p {
+    color: rgba(247, 244, 236, 0.7);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+  .cta-final-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-final .btn-primary { background: var(--accent); border-color: var(--accent); }
+  .cta-final .btn-primary:hover { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+  .cta-final .btn-secondary { color: var(--bg); border-color: var(--bg); }
+  .cta-final .btn-secondary:hover { background: var(--bg); color: var(--ink); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 4rem 2.5rem 2rem;
+    border-top: 1px solid rgba(247, 244, 236, 0.1);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(247, 244, 236, 0.1);
+  }
+  .footer-brand .logo { color: var(--bg); margin-bottom: 1rem; display: block; }
+  .footer-brand p {
+    color: rgba(247, 244, 236, 0.6);
+    font-size: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-col h5 {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a {
+    color: rgba(247, 244, 236, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--bg); }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(247, 244, 236, 0.4);
+    font-size: 0.85rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 7rem 1.2rem 4rem;
+      gap: 3rem;
+    }
+    .hero-visual { max-width: 360px; margin: 0 auto; }
+    .ticker-track { gap: 2rem; }
+    .problem, .solution, .templates, .pricing, .process, .about, .faq, .cta-final {
+      padding: 5rem 1.2rem;
+    }
+    .problems-grid, .solution-grid, .template-cards, .pricing-grid, .about-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .process-step::after { display: none; }
+    .templates-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .price-card.featured { transform: none; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">ICHIMAI<span class="dot">.</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#problem">課題</a></li>
+      <li><a href="#templates">テンプレート</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <a href="#cta-final" class="nav-cta">DMで相談 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      テンプレート3種、本日より販売中
+    </div>
+    <h1>
+      かけ出しの<br>
+      経営者のための、<br>
+      <span class="highlight">はじめの<span class="ital">一枚。</span></span>
+    </h1>
+    <p class="hero-lead">
+      "ちゃんとした名刺代わりのHPが欲しい。でも30万は出せない。" その間を埋める、プロ品質のテンプレートを<strong>¥9,800〜</strong>でご用意しました。
+    </p>
+    <div class="hero-actions">
+      <a href="#templates" class="btn-primary">
+        テンプレートを見る <span class="arrow">→</span>
+      </a>
+      <a href="#pricing" class="btn-secondary">料金を確認</a>
+    </div>
+    <div class="hero-proof">
+      <div class="avatars">
+        <span>K</span>
+        <span>M</span>
+        <span>A</span>
+      </div>
+      <div><strong>120名以上</strong>の経営者にお届け済み</div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="preview-card preview-card-1 pv1">
+      <div class="preview-inner">
+        <div class="pv-nav"><span>STUDIO.NOIR</span><span>— 01</span></div>
+        <h4>静かに、確かに、<br>あなたらしさを。</h4>
+        <div class="pv-tag">和モダン / Editorial</div>
+      </div>
+    </div>
+    <div class="preview-card preview-card-2 pv2">
+      <div class="preview-inner">
+        <div class="pv-nav"><span>HELLO!</span><span>★</span></div>
+        <h4>毎日に、<span class="it">ちいさな幸せ</span>を。</h4>
+        <div class="pv-tag">ポップ / 親しみ系</div>
+      </div>
+    </div>
+    <div class="preview-card preview-card-3 pv3">
+      <div class="preview-inner">
+        <div class="pv-nav"><span>KAIRO/CO</span><span>2025</span></div>
+        <h4>Next <span class="it">decision,</span><br>made right.</h4>
+        <div class="pv-tag">エディトリアル / 信頼</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-label">— こんな業種の方々にご利用いただいています —</div>
+  <div class="ticker-track">
+    <span>カフェ</span><span class="sep">●</span>
+    <span>美容サロン</span><span class="sep">●</span>
+    <span>コンサルタント</span><span class="sep">●</span>
+    <span>ハンドメイド作家</span><span class="sep">●</span>
+    <span>士業</span><span class="sep">●</span>
+    <span>パーソナルトレーナー</span><span class="sep">●</span>
+    <span>料理教室</span><span class="sep">●</span>
+    <span>IT系フリーランス</span><span class="sep">●</span>
+    <span>カフェ</span><span class="sep">●</span>
+    <span>美容サロン</span><span class="sep">●</span>
+    <span>コンサルタント</span><span class="sep">●</span>
+    <span>ハンドメイド作家</span><span class="sep">●</span>
+    <span>士業</span><span class="sep">●</span>
+    <span>パーソナルトレーナー</span><span class="sep">●</span>
+    <span>料理教室</span><span class="sep">●</span>
+    <span>IT系フリーランス</span><span class="sep">●</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="reveal">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">
+      <em>「いい感じ」のHP</em> がほしい、<br>
+      でも、こんな壁にぶつかっていませんか？
+    </h2>
+    <p class="section-lead">独立・開業したての方からよく聞く悩みを、整理してみました。</p>
+  </div>
+  <div class="problems-grid">
+    <div class="problem-card reveal">
+      <div class="problem-icon">💸</div>
+      <div>
+        <h3>制作会社に頼むと、30万〜は当たり前。</h3>
+        <p>始めたばかりで売上が安定しないうちに、まとまった初期投資は重すぎる。</p>
+      </div>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">🛠</div>
+      <div>
+        <h3>自分で作ると、どうしてもダサくなる。</h3>
+        <p>Wix・STUDIO・WordPressを触ってみたけど、思ったような完成度にならない。</p>
+      </div>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">📱</div>
+      <div>
+        <h3>SNSだけだと、信頼してもらえない。</h3>
+        <p>Instagramのプロフィールから「ちゃんとしたHP」に飛ばせないと、問い合わせに繋がりにくい。</p>
+      </div>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon">⏳</div>
+      <div>
+        <h3>制作に何ヶ月もかけたくない。</h3>
+        <p>事業の準備と並行して、HPの打ち合わせを延々と続ける時間も体力もない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution">
+  <div class="reveal">
+    <div class="section-label" style="justify-content: center; display: inline-flex;">Our Answer</div>
+    <h2 class="section-title">
+      "プロが作った一枚" を、<br>
+      <em>そのまま</em>お渡しします。
+    </h2>
+    <p class="section-lead">テンプレート販売だからこそ実現できる、3つの約束。</p>
+  </div>
+  <div class="solution-grid">
+    <div class="solution-item reveal">
+      <div class="num">01</div>
+      <h3>プロ品質 ×<br>低価格</h3>
+      <p>受託制作の1/10以下の価格で、デザイナーが本気でつくった完成形をお渡し。「安いから仕方ない」とは言わせません。</p>
+    </div>
+    <div class="solution-item reveal">
+      <div class="num">02</div>
+      <h3>業種を問わない<br>3つの選択肢</h3>
+      <p>「上品な和モダン」「親しみのポップ」「硬派なエディトリアル」。 あなたのビジネスに最も近いテイストを選べます。</p>
+    </div>
+    <div class="solution-item reveal">
+      <div class="num">03</div>
+      <h3>納品翌日から<br>使える</h3>
+      <p>HTMLファイル1つの構成で、サーバーにアップロードするだけ。専門知識ゼロでも、最短1日で公開できます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section class="templates" id="templates">
+  <div class="templates-header">
+    <div class="reveal">
+      <div class="section-label">Templates</div>
+      <h2 class="section-title">3つのテイスト、<br>1つの<em>"あなた"</em>。</h2>
+    </div>
+    <div class="reveal">
+      <p class="section-lead">それぞれ全く異なる世界観で設計しています。 ご自身のビジネスに最も近い1つを、選んでください。</p>
+    </div>
+  </div>
+
+  <div class="template-cards">
+    <div class="tpl-card reveal">
+      <div class="tpl-thumb tpl-thumb-1">
+        <div class="tpl-meta">— No. 01</div>
+        <div class="tpl-h">静かに、確かに、<br><span class="it">あなたらしさ</span>を。</div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-style">和モダン / Editorial</div>
+        <h3 class="tpl-name">STUDIO NOIR</h3>
+        <p class="tpl-desc">上質で静謐な世界観。落ち着いたブランドや、丁寧な仕事を伝えたい方へ。</p>
+        <div class="tpl-tags">
+          <span>士業</span><span>作家業</span><span>上質サロン</span><span>カフェ</span>
+        </div>
+        <div class="tpl-price">
+          <strong>¥9,800</strong>
+          <small>〜 (税込)</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="tpl-card reveal">
+      <div class="tpl-thumb tpl-thumb-2">
+        <div class="tpl-meta">★ OPEN</div>
+        <div class="tpl-h">毎日に、<br><span class="it">ちいさな幸せ</span>を。</div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-style">ポップ / 親しみ系</div>
+        <h3 class="tpl-name">HELLO! BAKERY</h3>
+        <p class="tpl-desc">明るく親しみのあるテイスト。お客さんとの距離が近い業種にぴったり。</p>
+        <div class="tpl-tags">
+          <span>カフェ</span><span>サロン</span><span>教室</span><span>ハンドメイド</span>
+        </div>
+        <div class="tpl-price">
+          <strong>¥9,800</strong>
+          <small>〜 (税込)</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="tpl-card reveal">
+      <div class="tpl-thumb tpl-thumb-3">
+        <div class="tpl-meta">— FILE / 003</div>
+        <div class="tpl-h">Next <span class="it">decision,</span><br>made right.</div>
+      </div>
+      <div class="tpl-body">
+        <div class="tpl-style">エディトリアル / 信頼</div>
+        <h3 class="tpl-name">KAIRO / CO</h3>
+        <p class="tpl-desc">硬派で洗練された雰囲気。専門性と信頼感を伝えたい方に最適です。</p>
+        <div class="tpl-tags">
+          <span>コンサル</span><span>士業</span><span>IT</span><span>スタートアップ</span>
+        </div>
+        <div class="tpl-price">
+          <strong>¥9,800</strong>
+          <small>〜 (税込)</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header reveal">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">あなたに合った、<br><em>ちょうど良い</em>プラン。</h2>
+    <p class="section-lead">「自分で編集できる方」から「全部おまかせしたい方」まで。</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-name">LIGHT</div>
+      <p class="price-desc">テンプレートだけ、お渡しします。 自分で編集できる方に。</p>
+      <div class="price-amount">
+        <span class="yen">¥</span>
+        <strong>9,800</strong>
+        <small>(税込)</small>
+      </div>
+      <ul class="price-features">
+        <li>テンプレート1種 (HTMLファイル)</li>
+        <li>使い方ガイドPDF</li>
+        <li>編集方法サポート (テキストのみ)</li>
+        <li>商用利用OK</li>
+      </ul>
+      <a href="#cta-final" class="price-cta">このプランで相談する</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="badge">★ 人気No.1</div>
+      <div class="price-name">STANDARD</div>
+      <p class="price-desc">テキストと画像、こちらで差し替えます。一番カンタンです。</p>
+      <div class="price-amount">
+        <span class="yen">¥</span>
+        <strong>34,800</strong>
+        <small>(税込)</small>
+      </div>
+      <ul class="price-features">
+        <li>LIGHTの全て</li>
+        <li>テキスト・画像の差し替え代行</li>
+        <li>色のカスタマイズ (3色まで)</li>
+        <li>納品まで7営業日</li>
+        <li>納品後30日サポート</li>
+      </ul>
+      <a href="#cta-final" class="price-cta">このプランで相談する</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-name">FULL</div>
+      <p class="price-desc">レイアウト変更まで含めて、 セミオーダーで仕上げます。</p>
+      <div class="price-amount">
+        <span class="yen">¥</span>
+        <strong>78,000</strong>
+        <small>〜 (税込)</small>
+      </div>
+      <ul class="price-features">
+        <li>STANDARDの全て</li>
+        <li>セクションの追加・削除</li>
+        <li>独自ロゴの作成</li>
+        <li>お問い合わせフォーム設置</li>
+        <li>納品後90日サポート</li>
+      </ul>
+      <a href="#cta-final" class="price-cta">このプランで相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="reveal">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">公開まで、<em>4ステップ。</em></h2>
+    <p class="section-lead">DMでのご相談から、公開まで。最短1週間で完了します。</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="num">STEP 01</div>
+      <div class="icon">💬</div>
+      <h3>DMで相談</h3>
+      <p>InstagramまたはXのDMで、ご希望のテンプレ・プランをお知らせください。</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="num">STEP 02</div>
+      <div class="icon">📝</div>
+      <h3>ヒアリング</h3>
+      <p>ビジネス内容・掲載したい情報をシンプルなフォームでお伺いします。</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="num">STEP 03</div>
+      <div class="icon">🎨</div>
+      <h3>制作・納品</h3>
+      <p>プランに応じて、最短即日〜7日間で完成データをお渡しします。</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="num">STEP 04</div>
+      <div class="icon">🚀</div>
+      <h3>公開</h3>
+      <p>サーバーへのアップロードもサポート。SNSからの導線も同時に整えます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">About</div>
+      <h2 class="section-title">"はじめの一歩" を、<br><em>応援したい。</em></h2>
+      <p class="section-lead">私自身、独立した時に、いちばん欲しかったのは「ちゃんとしたHP」でした。 でも、お金も時間もない。</p>
+      <p class="section-lead">同じ気持ちで悩んでいるかけ出し経営者の方に、 "ちょうどいい価格で、ちゃんとしたもの" を届けたい。 そんな想いで、このサービスを始めました。</p>
+    </div>
+    <div class="about-card reveal">
+      <p class="about-quote">最初の1枚が、あなたのビジネスを、もう一段引き上げてくれる。 そんな一枚を、一緒につくれたら嬉しいです。</p>
+      <div class="about-author">
+        <div class="av">D</div>
+        <div>
+          <strong>Designer / Founder</strong>
+          <span>ICHIMAI. 代表 — 2025年より活動中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="reveal" style="text-align: center;">
+    <div class="section-label" style="justify-content: center; display: inline-flex;">FAQ</div>
+    <h2 class="section-title" style="margin-left: auto; margin-right: auto;">よくあるご質問</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q"><span>テンプレートはあとから自分で編集できますか？</span><span class="plus">+</span></div>
+      <div class="faq-a">はい、可能です。HTMLファイルでお渡ししますので、メモ帳やテキストエディタで開いてテキスト部分を書き換えるだけで編集できます。簡単な使い方ガイドPDFも同梱しています。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>サーバーやドメインの契約は別途必要ですか？</span><span class="plus">+</span></div>
+      <div class="faq-a">はい、別途必要です。月額500〜1,000円ほどのレンタルサーバー（XserverやConoHa WINGなど）と、独自ドメインの取得をおすすめしています。設定方法もお伝えしますのでご安心ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>スマホでもキレイに表示されますか？</span><span class="plus">+</span></div>
+      <div class="faq-a">はい、全てのテンプレートはレスポンシブ対応です。PC・タブレット・スマホ、どの端末からアクセスしても最適な表示になるよう設計しています。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>同じテンプレートを買った人と被りませんか？</span><span class="plus">+</span></div>
+      <div class="faq-a">テキスト・画像・色を差し替えていただくことで、見た目の印象は大きく変わります。心配な方には、STANDARDプラン以上で色や細部のカスタマイズを承っています。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>納品後のサポートはありますか？</span><span class="plus">+</span></div>
+      <div class="faq-a">プランに応じてサポート期間を設けています (LIGHT: なし / STANDARD: 30日 / FULL: 90日)。期間内であれば軽微な修正や、操作方法のご質問はDMでお受けしています。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>商用利用は可能ですか？</span><span class="plus">+</span></div>
+      <div class="faq-a">はい、もちろん可能です。ご自身のビジネス用としてご自由にお使いください。ただし、テンプレート自体を第三者に再販することはお控えください。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="cta-final">
+  <div class="cta-final-inner">
+    <h2>まずは <em>気軽に</em> DMしてください。</h2>
+    <p>「どのプランがいいか分からない」「予算の相談がしたい」も大歓迎です。</p>
+    <div class="cta-final-buttons">
+      <a href="#" class="btn-primary">
+        Instagramで相談 <span class="arrow">→</span>
+      </a>
+      <a href="#" class="btn-secondary">Xで相談</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">ICHIMAI<span style="color: var(--accent);">.</span></span>
+      <p>かけ出し経営者のための、はじめの一枚。 プロ品質のHPテンプレートを、手の届く価格で。</p>
+    </div>
+    <div class="footer-col">
+      <h5>Service</h5>
+      <ul>
+        <li><a href="#templates">テンプレート</a></li>
+        <li><a href="#pricing">料金</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">Instagram DM</a></li>
+        <li><a href="#">X (Twitter) DM</a></li>
+        <li><a href="#">メール</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Info</h5>
+      <ul>
+        <li><a href="#">利用規約</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">特定商取引法に基づく表記</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ICHIMAI. All rights reserved.</span>
+    <span>Designed with care, in Japan.</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
